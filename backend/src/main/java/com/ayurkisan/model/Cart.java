@@ -1,0 +1,1 @@
+package com.ayurkisan.model; public class Cart {}

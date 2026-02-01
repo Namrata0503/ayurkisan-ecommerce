@@ -1,0 +1,1 @@
+package com.ayurkisan; public class AyurkisanApplication { public static void main(String[] args) {} }

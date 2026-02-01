@@ -1,0 +1,1 @@
+package com.ayurkisan.config; public class SecurityConfig {}

@@ -1,0 +1,1 @@
+package com.ayurkisan.repository; public interface CartRepository {}
