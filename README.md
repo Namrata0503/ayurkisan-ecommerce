@@ -172,3 +172,8 @@ After installing these extensions:
 - MongoDB Atlas can be accessed from VS Code
 
 Happy Coding! 🎉
+
+## DB Name and Passwords:
+
+Name :Ayurkisan-Ecommerce
+Password :Ayurkisan2026
