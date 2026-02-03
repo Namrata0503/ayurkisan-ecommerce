@@ -177,3 +177,6 @@ Happy Coding! 🎉
 
 Name :Ayurkisan-Ecommerce
 Password :Ayurkisan2026
+
+## To Run Backend use this command-
+mvn -q spring-boot:run
