@@ -180,3 +180,26 @@ Password :Ayurkisan2026
 
 ## To Run Backend use this command-
 mvn -q spring-boot:run
+
+## AYURKISAN BACKEND – API ROUTES DOCUMENT
+USER APIs-
+Base URL - http://localhost:8080
+Get Self Profile - GET /api/user/me
+Update Profile - PUT /api/user/update-profile
+    
+    body - {
+  "name": "Rahul Patil",
+  "address": "Pune",
+  "phone": "9876543210"
+}
+Update Password - PUT /api/user/update-password
+Body - {
+  "oldPassword": "12345",
+  "newPassword": "newpass123"
+}
+Delete Account - DELETE /api/user/delete
+
+ADMIN APIs-
+Get All Users - GET /api/admin/users
+GET /api/admin/users - GET /api/admin/users?address="place name"
+Recover Deleted User- PUT /api/admin/recover
