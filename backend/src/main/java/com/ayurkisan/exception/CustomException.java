@@ -1,1 +1,0 @@
-package com.ayurkisan.exception; public class CustomException extends RuntimeException {}
