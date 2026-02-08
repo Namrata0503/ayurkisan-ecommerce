@@ -29,7 +29,6 @@
             <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
 
-
         <!-- WEB -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
