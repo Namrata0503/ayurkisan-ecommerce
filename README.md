@@ -179,7 +179,12 @@ Name :Ayurkisan-Ecommerce
 Password :Ayurkisan2026
 
 ## To Run Backend use this command-
-mvn -q spring-boot:run
+mvn -q spring-boot:run 
+or
+mvn clean spring-boot:run
+
+## Swagger URL -
+http://localhost:8080/swagger-ui/index.html
 
 ## AYURKISAN BACKEND – API ROUTES DOCUMENT
 USER APIs-

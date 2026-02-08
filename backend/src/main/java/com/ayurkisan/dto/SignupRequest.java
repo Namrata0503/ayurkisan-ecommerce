@@ -1,13 +1,31 @@
 package com.ayurkisan.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
+
 public class SignupRequest {
 
+    @NotBlank(message = "Name is required")
+    @Pattern(regexp = "^[A-Za-z ]+$", message = "Name must contain only alphabets")
     private String name;
+
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email format")
     private String email;
+
+    @NotBlank(message = "Password is required")
+    @Size(min = 6, message = "Password must be at least 6 characters")
     private String password;
-    private String address;
+
+    @NotBlank(message = "Phone is required")
+    @Pattern(regexp = "^[0-9]{10}$", message = "Phone must be 10 digits")
     private String phone;
 
+    private String address;
+
+    // ✅ GETTERS & SETTERS (VERY IMPORTANT)
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
 
@@ -17,9 +35,9 @@ public class SignupRequest {
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
 
-    public String getAddress() { return address; }
-    public void setAddress(String address) { this.address = address; }
-
     public String getPhone() { return phone; }
     public void setPhone(String phone) { this.phone = phone; }
+
+    public String getAddress() { return address; }
+    public void setAddress(String address) { this.address = address; }
 }

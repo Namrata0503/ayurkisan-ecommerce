@@ -14,6 +14,8 @@ import com.ayurkisan.dto.UserUpdateRequest;
 import com.ayurkisan.model.User;
 import com.ayurkisan.service.UserService;
 
+import jakarta.validation.Valid;
+
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
@@ -28,22 +30,23 @@ public class UserController {
     }
 
     // UPDATE PROFILE INFO
-    @PutMapping("/update-profile")
-    public User updateProfile(
-            @RequestParam String email,
-            @RequestBody UserUpdateRequest request) {
-
-        return userService.updateProfile(email, request);
-    }
+   @PutMapping("/update-profile")
+public User updateProfile(
+        @RequestParam String email,
+        @Valid @RequestBody UserUpdateRequest request
+) {
+    return userService.updateProfile(email, request);
+}
 
     // UPDATE PASSWORD
-    @PutMapping("/update-password")
-    public String updatePassword(
-            @RequestParam String email,
-            @RequestBody PasswordUpdateRequest request) {
+   @PutMapping("/update-password")
+public String updatePassword(
+        @RequestParam String email,
+        @Valid @RequestBody PasswordUpdateRequest request
+) {
+    return userService.updatePassword(email, request);
+}
 
-        return userService.updatePassword(email, request);
-    }
 
     // SOFT DELETE
     @DeleteMapping("/delete")
