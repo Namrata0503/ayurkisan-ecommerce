@@ -73,22 +73,40 @@ public class AuthController {
     // ==========================
     // SINGLE LOGIN (USER + ADMIN)
     // ==========================
-    @PostMapping("/login")
-    public String login(@RequestBody LoginRequest request) {
+   @PostMapping("/login")
+public ResponseEntity<?> login(@RequestBody LoginRequest request) {
 
-        User user = userRepository.findByEmailAndIsDeleteFalse(request.getEmail())
-                .orElseThrow(() -> new ResponseStatusException(
-                HttpStatus.NOT_FOUND,
-                "User not found"
-        ));
-
-        if (!user.getPassword().equals(request.getPassword())) {
-            throw new ResponseStatusException(
+    User user = userRepository.findByEmailAndIsDeleteFalse(request.getEmail())
+            .orElseThrow(() -> new ResponseStatusException(
                     HttpStatus.NOT_FOUND,
                     "User not found"
-            );
-        }
+            ));
 
-        return jwtUtil.generateToken(user.getEmail(), user.getRole());
+    if (!user.getPassword().equals(request.getPassword())) {
+        throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND,
+                "User not found"
+        );
     }
+
+    String token = jwtUtil.generateToken(user.getEmail(), user.getRole());
+
+    // 🔥 ROLE BASED MESSAGE
+    String message;
+    if ("ADMIN".equalsIgnoreCase(user.getRole())) {
+        message = "Admin login successfully";
+    } else {
+        message = "User login successfully";
+    }
+
+    // 🔥 RESPONSE WITHOUT EXTRA FILE
+    return ResponseEntity.ok(
+            java.util.Map.of(
+                    "message", message,
+                    "token", token,
+                    "role", user.getRole()
+            )
+    );
+}
+
 }
