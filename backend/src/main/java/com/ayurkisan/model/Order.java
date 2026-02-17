@@ -1,1 +1,0 @@
-package com.ayurkisan.model; public class Order {}
