@@ -2,35 +2,49 @@ package com.ayurkisan.controller;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.NonNull;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.ayurkisan.model.User;
-import com.ayurkisan.service.UserService;
+import com.ayurkisan.model.Customer;
+import com.ayurkisan.model.Retailer;
+import com.ayurkisan.service.AdminService;
 
 @RestController
 @RequestMapping("/api/admin")
+@CrossOrigin("*")
 public class AdminController {
 
-    private final UserService userService;
+    @Autowired
+    private AdminService adminService;
 
-    public AdminController(UserService userService) {
-        this.userService = userService;
+    // ================= VIEW ALL CUSTOMERS =================
+    @GetMapping("/customers")
+    public List<Customer> getAllCustomers() {
+        return adminService.getAllCustomers();
     }
 
-    // GET ALL USERS (ONLY USER ROLE, ADDRESS OPTIONAL)
-    @GetMapping("/users")
-    public List<User> getAllUsers(
-            @RequestParam(required = false) String address) {
-        return userService.getAllUsers(address);
+    // ================= VIEW ALL RETAILERS =================
+    @GetMapping("/retailers")
+    public List<Retailer> getAllRetailers() {
+        return adminService.getAllRetailers();
     }
 
-    // RECOVER USER (EMAIL + isDelete = true)
-    @PutMapping("/recover")
-    public String recoverUser(@RequestParam String email) {
-        return userService.recoverUserByEmail(email);
-    }
+  // ================= RECOVER CUSTOMER =================
+@PutMapping("/recover/customer/{id}")
+public String recoverCustomer(@PathVariable @NonNull String id) {
+    return adminService.recoverCustomer(id);
+}
+
+// ================= RECOVER RETAILER =================
+@PutMapping("/recover/retailer/{id}")
+public String recoverRetailer(@PathVariable @NonNull String id) {
+    return adminService.recoverRetailer(id);
+}
+
 }

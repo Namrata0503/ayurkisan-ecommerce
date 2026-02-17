@@ -1,112 +1,52 @@
 package com.ayurkisan.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
+import com.ayurkisan.dto.AdminSignupRequest;
+import com.ayurkisan.dto.AuthResponse;
+import com.ayurkisan.dto.CustomerSignupRequest;
 import com.ayurkisan.dto.LoginRequest;
-import com.ayurkisan.dto.SignupRequest;
-import com.ayurkisan.model.User;
-import com.ayurkisan.repository.UserRepository;
-import com.ayurkisan.util.JwtUtil;
+import com.ayurkisan.dto.RetailerSignupRequest;
+import com.ayurkisan.service.AuthService;
 
 import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/auth")
+@CrossOrigin("*")
 public class AuthController {
 
     @Autowired
-    private UserRepository userRepository;
+    private AuthService authService;
 
-    @Autowired
-    private JwtUtil jwtUtil;
-
-    // ==========================
-    // USER REGISTRATION
-    // ==========================
-    @PostMapping("/signup")
-    public ResponseEntity<?> signup(
-            @Valid @RequestBody SignupRequest request,
-            BindingResult bindingResult
-    ) {
-
-        // 🔴 VALIDATION CHECK (THIS WAS MISSING)
-        if (bindingResult.hasErrors()) {
-            String errorMessage = bindingResult
-                    .getAllErrors()
-                    .get(0)
-                    .getDefaultMessage();
-
-            return ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST)
-                    .body(errorMessage);
-        }
-
-        if (userRepository.existsByEmail(request.getEmail())) {
-            return ResponseEntity
-                    .status(HttpStatus.BAD_REQUEST)
-                    .body("Email already exists");
-        }
-
-        User user = new User();
-        user.setName(request.getName());
-        user.setEmail(request.getEmail());
-        user.setPassword(request.getPassword());
-        user.setAddress(request.getAddress());
-        user.setPhone(request.getPhone());
-
-        user.setRole("USER");
-        user.setDelete(false);
-
-        return ResponseEntity
-                .status(HttpStatus.CREATED)
-                .body(userRepository.save(user));
+    // ================= CUSTOMER SIGNUP =================
+    @PostMapping("/customer/signup")
+    public String registerCustomer(@RequestBody CustomerSignupRequest request) {
+        return authService.registerCustomer(request);
     }
 
-    // ==========================
-    // SINGLE LOGIN (USER + ADMIN)
-    // ==========================
-   @PostMapping("/login")
-public ResponseEntity<?> login(@RequestBody LoginRequest request) {
-
-    User user = userRepository.findByEmailAndIsDeleteFalse(request.getEmail())
-            .orElseThrow(() -> new ResponseStatusException(
-                    HttpStatus.NOT_FOUND,
-                    "User not found"
-            ));
-
-    if (!user.getPassword().equals(request.getPassword())) {
-        throw new ResponseStatusException(
-                HttpStatus.NOT_FOUND,
-                "User not found"
-        );
+    // ================= RETAILER SIGNUP =================
+    @PostMapping("/retailer/signup")
+    public String registerRetailer(@RequestBody RetailerSignupRequest request) {
+        return authService.registerRetailer(request);
     }
+// ================= ADMIN REGISTER =================
+@PostMapping("/admin/register")
+public ResponseEntity<String> registerAdmin(
+        @Valid @RequestBody AdminSignupRequest request) {
 
-    String token = jwtUtil.generateToken(user.getEmail(), user.getRole());
-
-    // 🔥 ROLE BASED MESSAGE
-    String message;
-    if ("ADMIN".equalsIgnoreCase(user.getRole())) {
-        message = "Admin login successfully";
-    } else {
-        message = "User login successfully";
-    }
-
-    // 🔥 RESPONSE WITHOUT EXTRA FILE
-    return ResponseEntity.ok(
-            java.util.Map.of(
-                    "message", message,
-                    "token", token,
-                    "role", user.getRole()
-            )
-    );
+    return ResponseEntity.ok(authService.registerAdmin(request));
 }
 
+    // ================= LOGIN =================
+    @PostMapping("/login")
+    public AuthResponse login(@RequestBody LoginRequest request) {
+        return authService.login(request);
+    }
 }

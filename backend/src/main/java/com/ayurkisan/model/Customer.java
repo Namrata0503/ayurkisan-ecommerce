@@ -3,24 +3,21 @@ package com.ayurkisan.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document(collection = "Users") // EXACT collection name you want
-public class User {
+@Document(collection = "Customers")
+public class Customer {
 
     @Id
     private String id;
 
     private String name;
-    private String email;
-    private String password;
-   
     private String address;
-    private String phone;
+    private String email;
+    private String phoneNumber;
+    private String password;
+    private String role;
+    private boolean isDelete;
 
-    private String role;      // USER / ADMIN
-    private boolean isDelete; // soft delete
-
-
-    // ===== GETTERS & SETTERS =====
+    // ================= GETTERS & SETTERS =================
 
     public String getId() {
         return id;
@@ -38,6 +35,14 @@ public class User {
         this.name = name;
     }
 
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -46,44 +51,35 @@ public class User {
         this.email = email;
     }
 
+    public String getPhoneNumber() {   // ✅ THIS IS REQUIRED
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {   // ✅ THIS FIXES YOUR ERROR
+        this.phoneNumber = phoneNumber;
+    }
+
     public String getPassword() {
         return password;
     }
- 
+
     public void setPassword(String password) {
         this.password = password;
     }
- 
+
     public String getRole() {
         return role;
     }
- 
+
     public void setRole(String role) {
         this.role = role;
     }
- 
-    public String getAddress() {
-        return address;
-    }
- 
-    public void setAddress(String address) {
-        this.address = address;
-    }
- 
-    public String getPhone() {
-        return phone;
-    }
- 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
 
-    // 🔥 VERY IMPORTANT NAMING
     public boolean isDelete() {
         return isDelete;
     }
 
-    public void setDelete(boolean isDelete) {
-        this.isDelete = isDelete;
+    public void setDelete(boolean delete) {
+        isDelete = delete;
     }
 }

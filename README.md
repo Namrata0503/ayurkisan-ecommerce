@@ -189,22 +189,73 @@ http://localhost:8080/swagger-ui/index.html
 ## AYURKISAN BACKEND – API ROUTES DOCUMENT
 USER APIs-
 Base URL - http://localhost:8080
-Get Self Profile - GET /api/user/me
-Update Profile - PUT /api/user/update-profile
-    
-    body - {
-  "name": "Rahul Patil",
+1️⃣ Customer Registration - POST - /api/auth/customer/register
+Body Example -
+{
+  "name": "John Doe",
+  "email": "john@gmail.com",
+  "phoneNumber": "9876543210",
   "address": "Pune",
-  "phone": "9876543210"
+  "password": "john123"
 }
-Update Password - PUT /api/user/update-password
-Body - {
-  "oldPassword": "12345",
-  "newPassword": "newpass123"
+2️⃣ Retailer Registration - POST - /api/auth/retailer/register
+Body Example -
+{
+  "retailerName": "Ramesh",
+  "firmName": "Ramesh Agro",
+  "registrationId": "REG123",
+  "address": "Mumbai",
+  "phoneNumber": "9876543210",
+  "email": "retailer@gmail.com",
+  "password": "retailer123"
 }
-Delete Account - DELETE /api/user/delete
 
-ADMIN APIs-
-Get All Users - GET /api/admin/users
-GET /api/admin/users - GET /api/admin/users?address="place name"
-Recover Deleted User- PUT /api/admin/recover
+3️⃣ Admin Registration - POST - /api/auth/admin/register
+Request Body -
+{
+  "name": "Super Admin",
+  "email": "admin@gmail.com",
+  "phoneNumber": "9876543210",
+  "address": "Pune",
+  "password": "admin123"
+}
+
+4️⃣ Login (Customer / Retailer / Admin) - POST - /api/auth/login
+Request Body -
+{
+  "email": "admin@gmail.com",
+  "password": "admin123",
+  "role": "ADMIN"
+}
+
+ADMIN MODULE - 
+1️⃣ View All Customers - GET - /api/admin/customers
+2️⃣ View All Retailers - GET - /api/admin/retailers
+3️⃣ Recover Customer - PUT - /api/admin/recover/customer/{id}
+4️⃣ Recover Retailer - PUT - /api/admin/recover/retailer/{id}
+
+CUSTOMER MODULE APIs - 
+1️⃣ Update Customer Profile - PUT - /api/customer/update/{id}
+Request Body - 
+{
+  "name": "Updated Name",
+  "phoneNumber": "9876543210",
+  "address": "Updated Address"
+}
+
+2️⃣ Delete Customer (Soft Delete)- PUT - /api/customer/delete/{id}
+
+RETAILER MODULE APIs -
+1️⃣ Update Retailer Profile - PUT - /api/retailer/update/{id}
+Request Body
+{
+  "retailerName": "Ramesh",
+  "firmName": "Ramesh Agro",
+  "registrationId": "REG123",
+  "address": "Mumbai",
+  "phoneNumber": "9876543210",
+  "email": "retailer@gmail.com",
+  "password": "retailer123"
+}
+
+2️⃣ Delete Retailer (Soft Delete) - PUT - /api/retailer/delete/{id}
