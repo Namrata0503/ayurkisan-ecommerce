@@ -1,0 +1,16 @@
+package com.ayurkisan.repository;
+
+import java.util.List;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.stereotype.Repository;
+
+import com.ayurkisan.model.Product;
+
+@Repository
+public interface ProductRepository extends MongoRepository<Product, String> {
+
+    // 🔍 Search product by name (case insensitive)
+    List<Product> findByProductNameContainingIgnoreCase(String productName);
+
+}
