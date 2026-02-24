@@ -27,7 +27,7 @@ function Home() {
 
         <div className="hero-right">
           <img
-            src="https://images.unsplash.com/photo-1606813909355-0c0e1e7c9a3f"
+            src="https://www.pexels.com/photo/yellow-flowers-in-brown-clay-pot-7526023/"
             alt="Herbal"
           />
         </div>
