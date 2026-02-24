@@ -1,62 +1,57 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "../styles/auth.css";
 
 function Login() {
-  const [isActive, setIsActive] = useState(false);
+  const [form, setForm] = useState({
+    email: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+
+  localStorage.setItem("token", "dummy-token");
+  localStorage.setItem("role", "RETAILER");
+
+  navigate("/retailer-dashboard");
+};
 
   return (
-    <div className={`auth-wrapper ${isActive ? "active" : ""}`}>
+    <div className="auth-container">
+      <div className="auth-card">
+        <h2>Login to Ayurkisan 🌿</h2>
 
-      {/* LOGIN FORM */}
-      <div className="form-container sign-in">
-        <form>
-          <h2>Welcome Back 🌿</h2>
-          <input type="email" placeholder="Email" required />
-          <input type="password" placeholder="Password" required />
-          <button className="auth-btn">Login</button>
+        <form onSubmit={handleSubmit}>
+          <input
+            type="email"
+            name="email"
+            placeholder="Enter Email"
+            onChange={handleChange}
+            required
+          />
+
+          <input
+            type="password"
+            name="password"
+            placeholder="Enter Password"
+            onChange={handleChange}
+            required
+          />
+
+          <button type="submit">Login</button>
         </form>
-      </div>
 
-      {/* REGISTER FORM */}
-      <div className="form-container sign-up">
-        <form>
-          <h2>Create Account 🌱</h2>
-          <input type="text" placeholder="Full Name" required />
-          <input type="email" placeholder="Email" required />
-          <input type="password" placeholder="Password" required />
-          <button className="auth-btn">Sign Up</button>
-        </form>
+        <p>
+          Don't have an account?{" "}
+          <Link to="/signup">Sign Up</Link>
+        </p>
       </div>
-
-      {/* GREEN SLIDING PANEL */}
-      <div className="toggle-container">
-        <div className="toggle-content">
-          {!isActive ? (
-            <>
-              <h1>Join Ayurkisan 🌱</h1>
-              <p>Start your herbal wellness journey</p>
-              <button
-                className="ghost-btn"
-                onClick={() => setIsActive(true)}
-              >
-                Sign Up
-              </button>
-            </>
-          ) : (
-            <>
-              <h1>Welcome Back 🌿</h1>
-              <p>Already part of Ayurkisan?</p>
-              <button
-                className="ghost-btn"
-                onClick={() => setIsActive(false)}
-              >
-                Login
-              </button>
-            </>
-          )}
-        </div>
-      </div>
-
     </div>
   );
 }

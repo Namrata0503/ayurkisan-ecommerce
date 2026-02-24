@@ -1,1 +1,0 @@
-package com.ayurkisan.config; public class MongoConfig {}

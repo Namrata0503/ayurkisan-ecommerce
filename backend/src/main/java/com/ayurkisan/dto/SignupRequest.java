@@ -1,1 +1,0 @@
-package com.ayurkisan.dto; public class SignupRequest {}
