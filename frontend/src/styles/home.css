@@ -1,18 +1,37 @@
-/* MAIN CONTAINER */
-body {
-  margin: 0;
-  font-family: "Poppins", sans-serif;
-  background: #f6f9f6;
+/* HERO SECTION */
+
+.hero {
+  width: 100%;
+  min-height: 100vh;
+  padding: 60px 60px;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #f3f9f4, #e0f2e9);
+  position: relative;
+  overflow: hidden;
 }
 
-/* HERO SECTION */
-.hero {
-  max-width: 1200px;
-  margin: auto;
-  padding: 100px 20px;
+.hero::after {
+  content: "";
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: #c8e6c9;
+  border-radius: 50%;
+  right: -200px;
+  top: -150px;
+  opacity: 0.4;
+}
+
+.hero-container {
+  max-width: 1300px;
+  margin: 0 auto;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
+  z-index: 2;
 }
 
 .hero-left {
@@ -23,77 +42,159 @@ body {
   color: #2e7d32;
   font-weight: 600;
   letter-spacing: 1px;
+  font-size: 20px;
 }
 
 .hero-left h1 {
-  font-size: 52px;
+  font-size: 60px;
   margin: 20px 0;
   line-height: 1.2;
-  color: #1c1c1c;
+  color: #1b1b1b;
 }
 
 .hero-left p {
   color: #666;
-  font-size: 16px;
+  font-size: 20px;
   margin-bottom: 30px;
+  max-width: 500px;
+}
+
+.hero-buttons {
+  display: flex;
+  gap: 15px;
 }
 
 .hero-left button {
-  padding: 14px 28px;
+  padding: 18px 38px;      /* bigger */
+  font-size: 17px;         /* larger text */
+  border-radius: 40px;     /* more premium rounded */
+  font-weight: 600;
+  letter-spacing: 0.5px;
   background: #2e7d32;
   color: white;
   border: none;
-  border-radius: 30px;
-  font-size: 15px;
   cursor: pointer;
-  transition: 0.3s;
+  transition: all 0.3s ease;
 }
 
 .hero-left button:hover {
   background: #1b5e20;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 25px rgba(46,125,50,0.25);
 }
 
-/* HERO IMAGE */
+.outline-btn {
+  background: transparent !important;
+  border: 2px solid #2e7d32;
+  color: #2e7d32 !important;
+}
+
+.outline-btn:hover {
+  background: #2e7d32 !important;
+  color: white !important;
+}
+
 .hero-right img {
-  width: 500px;
+  width: 600px;
+  max-width: 100%;
   border-radius: 30px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+  box-shadow: 0 25px 60px rgba(0,0,0,0.08);
 }
 
-/* FEATURE SECTION */
-.feature-section {
-  max-width: 1100px;
-  margin: 80px auto;
-  background: white;
-  padding: 50px;
-  border-radius: 30px;
-  box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+/* FEATURES */
+
+.features {
+  padding: 80px 60px;
+  background: #ffffff;
+}
+
+.features-container {
+  max-width: 1200px;
+  margin: 0 auto;
   display: flex;
-  align-items: center;
-  gap: 50px;
+  gap: 30px;
+  justify-content: space-between;
 }
 
-.feature-section img {
-  width: 300px;
+.feature-card {
+  background: #f9fbf9;
+  padding: 30px;
   border-radius: 20px;
+  text-align: center;
+  flex: 1;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.04);
+  transition: 0.3s ease;
 }
 
-.feature-content h2 {
-  font-size: 30px;
-  margin-bottom: 15px;
+.feature-card:hover {
+  transform: translateY(-5px);
 }
 
-.feature-content p {
-  color: #666;
-  margin-bottom: 25px;
+/* BEST SELLERS */
+
+.best-sellers {
+  padding: 100px 60px;
+  background: #f3f9f4;
+  text-align: center;
 }
 
-.stats {
+.best-sellers h2 {
+  font-size: 32px;
+  margin-bottom: 50px;
+}
+
+.products-grid {
   display: flex;
+  justify-content: center;
   gap: 40px;
 }
 
-.stats h3 {
-  color: #2e7d32;
-  font-size: 26px;
+.product-card {
+  background: white;
+  padding: 30px;
+  border-radius: 25px;
+  width: 250px;
+  box-shadow: 0 15px 40px rgba(0,0,0,0.05);
+  transition: 0.3s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-5px);
+}
+
+.product-img {
+  height: 150px;
+  background: #e8f5e9;
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+.product-card button {
+  margin-top: 15px;
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: none;
+  background: #2e7d32;
+  color: white;
+  cursor: pointer;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 992px) {
+  .hero-container,
+  .features-container,
+  .products-grid {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-left {
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+  }
 }

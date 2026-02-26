@@ -5,28 +5,23 @@
   box-sizing: border-box;
 }
 
-/* BODY */
-body {
-  font-family: "Poppins", sans-serif;
-  background-color: #f6f9f6;   /* Soft light background */
-  color: #1c1c1c;
-  line-height: 1.6;
-}
-
-/* REMOVE VITE DEFAULT ROOT STYLING */
-#root {
+/* FULL HEIGHT FIX */
+html, body, #root {
+  height: 100%;
   width: 100%;
-  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
 }
 
-/* LINKS */
-a {
-  text-decoration: none;
-  color: inherit;
+/* REMOVE CENTERING FROM VITE DEFAULT */
+body {
+  display: block;
+  background-color: #ffffff;
 }
 
-/* BUTTON RESET */
-button {
-  font-family: inherit;
-  cursor: pointer;
+/* GLOBAL CONTAINER */
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
 }

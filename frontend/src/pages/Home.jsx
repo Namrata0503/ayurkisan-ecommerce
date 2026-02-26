@@ -3,6 +3,8 @@ import Footer from "../components/Footer";
 import "../styles/home.css";
 import { useNavigate } from "react-router-dom";
 
+import heroImage from "../assets/images/heroimage.jpg";
+
 function Home() {
   const navigate = useNavigate();
 
@@ -10,58 +12,96 @@ function Home() {
     <>
       <Navbar />
 
+      {/* HERO SECTION */}
       <section className="hero">
-        <div className="hero-left">
-          <span className="small-title">AYURVEDIC HERBAL PRODUCTS</span>
-          <h1>
-            Bringing Natural <br /> Wellness To You
-          </h1>
-          <p>
-            Discover premium Aloe Vera, Moringa, Tulsi and herbal
-            wellness products crafted for a healthier lifestyle.
-          </p>
-          <button onClick={() => navigate("/signup")}>
-            Shop Now
-          </button>
-        </div>
+        <div className="hero-container">
 
-        <div className="hero-right">
-          <img
-            src="https://www.pexels.com/photo/yellow-flowers-in-brown-clay-pot-7526023/"
-            alt="Herbal"
-          />
+          <div className="hero-left">
+            <span className="small-title">
+              AYURVEDIC HERBAL WELLNESS
+            </span>
+
+            <h1>
+              Natural Healing <br />
+              Starts From Within 🌿
+            </h1>
+
+            <p>
+              Experience the purity of Aloe Vera, Moringa,
+              Tulsi and Ayurvedic blends crafted for
+              complete wellness and vitality.
+            </p>
+
+            <div className="hero-buttons">
+              <button onClick={() => navigate("/signup")}>
+                Shop Now
+              </button>
+
+              <button
+                className="outline-btn"
+                onClick={() => navigate("/shop")}
+              >
+                Explore Collection
+              </button>
+            </div>
+          </div>
+
+          <div className="hero-right">
+            <img src={heroImage} alt="Herbal Products" />
+          </div>
+
         </div>
       </section>
 
-      <section className="feature-section">
-        <img
-          src="https://images.unsplash.com/photo-1556228724-4d23e6b91f46"
-          alt="Aloe"
-        />
+      {/* FEATURES SECTION */}
+      <section className="features">
+        <div className="features-container">
 
-        <div className="feature-content">
-          <h2>Why Choose Ayurkisan?</h2>
-          <p>
-            100% natural herbal wellness products with authentic
-            Ayurvedic ingredients and strict quality testing.
-          </p>
-
-          <div className="stats">
-            <div>
-              <h3>97%</h3>
-              <span>Customer Satisfaction</span>
-            </div>
-
-            <div>
-              <h3>85%</h3>
-              <span>Repeat Buyers</span>
-            </div>
-
-            <div>
-              <h3>100%</h3>
-              <span>Natural Ingredients</span>
-            </div>
+          <div className="feature-card">
+            <h3>100% Natural</h3>
+            <p>No chemicals, no preservatives. Pure Ayurvedic goodness.</p>
           </div>
+
+          <div className="feature-card">
+            <h3>Authentic Ingredients</h3>
+            <p>Sourced directly from trusted organic farms.</p>
+          </div>
+
+          <div className="feature-card">
+            <h3>Lab Tested</h3>
+            <p>Strict quality checks to ensure premium standards.</p>
+          </div>
+
+        </div>
+      </section>
+
+      {/* BEST SELLERS */}
+      <section className="best-sellers">
+        <h2>Our Best Sellers</h2>
+
+        <div className="products-grid">
+
+          <div className="product-card">
+            <div className="product-img"></div>
+            <h4>Aloe Vera Juice</h4>
+            <p>₹499</p>
+            <button onClick={() => navigate("/shop")}>View</button>
+          </div>
+
+          <div className="product-card">
+            <div className="product-img"></div>
+            <h4>Moringa Powder</h4>
+            <p>₹349</p>
+            <button onClick={() => navigate("/shop")}>View</button>
+          </div>
+
+          <div className="product-card">
+            <div className="product-img"></div>
+            <h4>Haldi Power Tea</h4>
+            <p>₹299</p>
+            <button onClick={() => navigate("/shop")}>View</button>
+          </div>
+
         </div>
       </section>
 

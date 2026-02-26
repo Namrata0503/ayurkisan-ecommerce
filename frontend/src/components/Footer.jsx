@@ -1,28 +1,23 @@
-import { FaFacebookF, FaInstagram, FaTwitter, FaWhatsapp } from "react-icons/fa";
 import "../styles/footer.css";
 
 function Footer() {
   return (
     <footer className="footer">
+
       <div className="footer-container">
 
-        {/* Column 1 */}
-        <div className="footer-col">
-          <h2 className="footer-logo">Ayurkisan 🌿</h2>
+        {/* COLUMN 1 - BRAND */}
+        <div className="footer-col brand">
+          <h2>Ayurkisan 🌿</h2>
           <p>
-            Bringing natural wellness through authentic Ayurvedic
-            and herbal products.
-          </p>
-          <p className="contact">
-            📞 +91 98765 43210  
-            <br />
-            📍 Satara, Maharashtra
+            Premium Ayurvedic and Herbal wellness products
+            crafted with purity, authenticity and care.
           </p>
         </div>
 
-        {/* Column 2 */}
+        {/* COLUMN 2 - QUICK LINKS */}
         <div className="footer-col">
-          <h3>Quick Links</h3>
+          <h4>Quick Links</h4>
           <ul>
             <li>Home</li>
             <li>Shop</li>
@@ -31,22 +26,32 @@ function Footer() {
           </ul>
         </div>
 
-        {/* Column 3 */}
+        {/* COLUMN 3 - SUPPORT */}
         <div className="footer-col">
-          <h3>Follow Us</h3>
-          <div className="social-icons">
-            <FaFacebookF />
-            <FaInstagram />
-            <FaTwitter />
-            <FaWhatsapp />
-          </div>
+          <h4>Support</h4>
+          <ul>
+            <li>Privacy Policy</li>
+            <li>Terms & Conditions</li>
+            <li>Shipping Policy</li>
+            <li>Return Policy</li>
+          </ul>
+        </div>
+
+        {/* COLUMN 4 - CONTACT */}
+        <div className="footer-col">
+          <h4>Contact</h4>
+          <p>Email: support@ayurkisan.com</p>
+          <p>Phone: +91 98765 43210</p>
+          <p>India 🇮🇳</p>
         </div>
 
       </div>
 
+      {/* BOTTOM BAR */}
       <div className="footer-bottom">
-        © 2026 Ayurkisan. All Rights Reserved.
+        <p>© {new Date().getFullYear()} Ayurkisan. All rights reserved.</p>
       </div>
+
     </footer>
   );
 }

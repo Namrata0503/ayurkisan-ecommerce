@@ -6,9 +6,8 @@ import Login from "../pages/Login";
 import CustomerSignup from "../pages/CustomerSignup";
 import RetailerSignup from "../pages/RetailerSignup";
 
-import AdminDashboard from "../dashboards/AdminDashboard";
-import CustomerDashboard from "../dashboards/CustomerDashboard";
-import RetailerDashboard from "../dashboards/RetailerDashboard";
+
+
 import Shop from "../pages/Shop";
 import ProductDetails from "../pages/ProductDetails";
 
@@ -17,7 +16,18 @@ import Contact from "../pages/Contact";
 import Cart from "../pages/Cart";
 import NotFound from "../pages/NotFound";
 
-import ProtectedRoute from "./ProtectedRoute";
+// Admin Pages
+import ManageProducts from "../pages/admin/ManageProducts";
+import AddProduct from "../pages/admin/AddProduct";
+import ManageCategories from "../pages/admin/ManageCategories";
+import EditProduct from "../pages/admin/EditProduct";
+import AdminDashboard from "../pages/admin/AdminDashboard";
+import ManageUsers from "../pages/admin/ManageUsers";
+import ManageOrders from "../pages/admin/ManageOrders";
+import ManageShipments from "../pages/admin/ManageShipments";
+import ManageReturns from "../pages/admin/ManageReturns";
+
+
 
 function AppRoutes() {
   return (
@@ -29,9 +39,8 @@ function AppRoutes() {
         <Route path="/signup/customer" element={<CustomerSignup />} />
         <Route path="/signup/retailer" element={<RetailerSignup />} />
 
-        <Route path="/admin-dashboard" element={<AdminDashboard />} />
-        <Route path="/customer-dashboard" element={<CustomerDashboard />} />
-        <Route path="/retailer-dashboard" element={<RetailerDashboard />} />
+        
+       
         <Route path="/shop" element={<Shop />} />
         <Route path="/product/:id" element={<ProductDetails />} />
 
@@ -40,32 +49,20 @@ function AppRoutes() {
         <Route path="/cart" element={<Cart />} />
         <Route path="*" element={<NotFound />} />
 
-        <Route
-          path="/admin-dashboard"
-          element={
-            <ProtectedRoute allowedRole="ADMIN">
-              <AdminDashboard />
-            </ProtectedRoute>
-          }
-        />
+{/* Admin Routes */}
+        <Route path="/admin/products" element={<ManageProducts />} />
+        <Route path="/admin/add-product" element={<AddProduct />} />
+        <Route path="/admin/categories" element={<ManageCategories />} />
+        <Route path="/admin/edit-product/:id" element={<EditProduct />} />
+        <Route path="/admin/dashboard" element={<AdminDashboard />} />
+        <Route path="/admin/users" element={<ManageUsers />} />
+        <Route path="/admin/orders" element={<ManageOrders />} />
+        <Route path="/admin/shipments" element={<ManageShipments />} />
+        <Route path="/admin/returns" element={<ManageReturns />} />
+        
+        
+        
 
-        <Route
-          path="/customer-dashboard"
-          element={
-            <ProtectedRoute allowedRole="CUSTOMER">
-              <CustomerDashboard />
-            </ProtectedRoute>
-          }
-        />
-
-        <Route
-          path="/retailer-dashboard"
-          element={
-            <ProtectedRoute allowedRole="RETAILER">
-              <RetailerDashboard />
-            </ProtectedRoute>
-          }
-        />
       </Routes>
     </Router>
   );
