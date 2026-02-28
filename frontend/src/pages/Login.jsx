@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import API from "../services/api";
 import "../styles/auth.css";
 
 function Login() {
@@ -15,21 +16,31 @@ function Login() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+const handleSubmit = async (e) => {
+  e.preventDefault();
 
-    // Temporary local login simulation
-    localStorage.setItem("token", "dummy-token");
-    localStorage.setItem("role", form.role);
+  try {
+    const response = await API.post("/auth/login", form);
 
-    if (form.role === "ADMIN") {
-      navigate("/admin-dashboard");
-    } else if (form.role === "CUSTOMER") {
-      navigate("/customer-dashboard");
-    } else {
-      navigate("/retailer-dashboard");
+    console.log("FULL RESPONSE:", response.data);   
+    console.log("ROLE FROM BACKEND:", response.data.role); 
+
+    const { token, role, userId } = response.data;
+
+    localStorage.setItem("token", token);
+    localStorage.setItem("role", role);
+    localStorage.setItem("userId", userId);
+
+    console.log("ROLE SAVED:", localStorage.getItem("role")); 
+
+    if (role === "ADMIN") {
+      navigate("/admin/dashboard");
     }
-  };
+
+  } catch (error) {
+    alert("Invalid Admin Credentials");
+  }
+};
 
   return (
     <div className="auth-container">
@@ -37,7 +48,7 @@ function Login() {
         <h2>Login to Ayurkisan 🌿</h2>
 
         <form onSubmit={handleSubmit}>
-          <select name="role" onChange={handleChange}>
+          <select name="role" value={form.role} onChange={handleChange}>
             <option value="CUSTOMER">Customer</option>
             <option value="RETAILER">Retailer</option>
             <option value="ADMIN">Admin</option>
@@ -48,6 +59,7 @@ function Login() {
             name="email"
             placeholder="Enter Email"
             required
+            value={form.email}
             onChange={handleChange}
           />
 
@@ -56,6 +68,7 @@ function Login() {
             name="password"
             placeholder="Enter Password"
             required
+            value={form.password}
             onChange={handleChange}
           />
 

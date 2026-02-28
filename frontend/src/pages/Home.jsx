@@ -2,11 +2,37 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "../styles/home.css";
 import { useNavigate } from "react-router-dom";
-
+import { useEffect } from "react";
 import heroImage from "../assets/images/heroimage.jpg";
 
+import aloeNeemImg from "../assets/products_img/aloeneemtulsi.png";
+import alomoringaImg from "../assets/products_img/aloemoringa.png";
+import ayupowerImg from "../assets/products_img/ayupower.png";
+
+//components
 function Home() {
   const navigate = useNavigate();
+// Scroll Reveal Effect
+  useEffect(() => {
+    const reveals = document.querySelectorAll(".reveal");
+
+    const revealOnScroll = () => {
+      reveals.forEach((el) => {
+        const windowHeight = window.innerHeight;
+        const elementTop = el.getBoundingClientRect().top;
+        const elementVisible = 100;
+
+        if (elementTop < windowHeight - elementVisible) {
+          el.classList.add("active");
+        }
+      });
+    };
+
+    window.addEventListener("scroll", revealOnScroll);
+    revealOnScroll();
+
+    return () => window.removeEventListener("scroll", revealOnScroll);
+  }, []);
 
   return (
     <>
@@ -54,7 +80,7 @@ function Home() {
       </section>
 
       {/* FEATURES SECTION */}
-      <section className="features">
+      <section className="features reveal">
         <div className="features-container">
 
           <div className="feature-card">
@@ -76,31 +102,31 @@ function Home() {
       </section>
 
       {/* BEST SELLERS */}
-      <section className="best-sellers">
+      <section className="best-sellers reveal">
         <h2>Our Best Sellers</h2>
 
         <div className="products-grid">
 
           <div className="product-card">
-            <div className="product-img"></div>
-            <h4>Aloe Vera Juice</h4>
-            <p>₹499</p>
-            <button onClick={() => navigate("/shop")}>View</button>
-          </div>
+  <img src={aloeNeemImg} alt="Aloe Neem Tulsi Juice" className="product-image" />
+  <h4>Aloe Neem Tulsi</h4>
+  <p>₹499</p>
+  <button onClick={() => navigate("/shop")}>View</button>
+</div>
 
-          <div className="product-card">
-            <div className="product-img"></div>
-            <h4>Moringa Powder</h4>
-            <p>₹349</p>
-            <button onClick={() => navigate("/shop")}>View</button>
-          </div>
+<div className="product-card">
+  <img src={alomoringaImg} alt="Alo Moringa Juice" className="product-image" />
+  <h4>Alo Moringa</h4>
+  <p>₹349</p>
+  <button onClick={() => navigate("/shop")}>View</button>
+</div>
 
-          <div className="product-card">
-            <div className="product-img"></div>
-            <h4>Haldi Power Tea</h4>
-            <p>₹299</p>
-            <button onClick={() => navigate("/shop")}>View</button>
-          </div>
+<div className="product-card">
+  <img src={ayupowerImg} alt="Ayupower Tea" className="product-image" />
+  <h4>Ayupower Tea</h4>
+  <p>₹299</p>
+  <button onClick={() => navigate("/shop")}>View</button>
+</div>
 
         </div>
       </section>

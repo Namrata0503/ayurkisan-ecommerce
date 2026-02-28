@@ -115,3 +115,9 @@
 .admin-content {
   padding: 30px;
 }
+
+.admin-sidebar a.active {
+  background: linear-gradient(90deg, #2e7d32, #4caf50);
+  color: white;
+  border-radius: 8px;
+}

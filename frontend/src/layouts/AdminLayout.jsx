@@ -49,6 +49,13 @@ function AdminLayout({ children }) {
             </NavLink>
           </li>
 
+<li>
+  <NavLink to="/admin/manage-admins">
+    <FaUsers />
+    {!collapsed && "Manage Admins"}
+  </NavLink>
+</li>
+
           <li>
             <NavLink to="/admin/categories">
               <FaList />
