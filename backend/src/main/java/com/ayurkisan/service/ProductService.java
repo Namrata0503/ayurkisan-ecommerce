@@ -39,61 +39,83 @@ public class ProductService {
     }
 
     // ================= ADMIN UPDATE PRODUCT =================
-    public Product updateProduct(String id, Product updatedProduct) {
+public Product updateProduct(String productName, Product updatedProduct) {
 
-        Product existing = productRepository.findById(id)
-                .orElseThrow(() -> new ResponseStatusException(
-                        HttpStatus.NOT_FOUND,
-                        "Product not found with id: " + id));
+    Product existing = productRepository.findByProductNameIgnoreCase(productName)
+            .orElseThrow(() -> new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "Product not found with name: " + productName));
 
-        existing.setProductName(updatedProduct.getProductName());
-        existing.setDescription(updatedProduct.getDescription());
-        existing.setBrand(updatedProduct.getBrand());
-        existing.setPrice(updatedProduct.getPrice());
-        existing.setDiscount(updatedProduct.getDiscount());
-        existing.setStockQuantity(updatedProduct.getStockQuantity());
-        existing.setProductImage(updatedProduct.getProductImage());
-        existing.setCategoryId(updatedProduct.getCategoryId());
-        existing.setIngredients(updatedProduct.getIngredients());
-        existing.setUsageInstructions(updatedProduct.getUsageInstructions());
-        existing.setDosage(updatedProduct.getDosage());
-        existing.setSideEffects(updatedProduct.getSideEffects());
-        existing.setExpiryDate(updatedProduct.getExpiryDate());
-        existing.setManufacturingDate(updatedProduct.getManufacturingDate());
-        existing.setWeight(updatedProduct.getWeight());
-        existing.setPrescriptionRequired(updatedProduct.isPrescriptionRequired());
+    existing.setProductName(updatedProduct.getProductName());
+    existing.setDescription(updatedProduct.getDescription());
+    existing.setBrand(updatedProduct.getBrand());
+    existing.setPrice(updatedProduct.getPrice());
+    existing.setDiscount(updatedProduct.getDiscount());
+    existing.setStockQuantity(updatedProduct.getStockQuantity());
+    existing.setProductImage(updatedProduct.getProductImage());
+    existing.setCategoryId(updatedProduct.getCategoryId());
+    existing.setIngredients(updatedProduct.getIngredients());
+    existing.setUsageInstructions(updatedProduct.getUsageInstructions());
+    existing.setDosage(updatedProduct.getDosage());
+    existing.setSideEffects(updatedProduct.getSideEffects());
+    existing.setExpiryDate(updatedProduct.getExpiryDate());
+    existing.setManufacturingDate(updatedProduct.getManufacturingDate());
+    existing.setWeight(updatedProduct.getWeight());
+    existing.setPrescriptionRequired(updatedProduct.isPrescriptionRequired());
 
-        existing.setPiecesPerBox(updatedProduct.getPiecesPerBox());
-        existing.setCustomerDiscount(updatedProduct.getCustomerDiscount());
-        existing.setRetailerDiscount(updatedProduct.getRetailerDiscount());
-        existing.setDiscountEnabled(updatedProduct.isDiscountEnabled());
+    existing.setPiecesPerBox(updatedProduct.getPiecesPerBox());
+    existing.setCustomerDiscount(updatedProduct.getCustomerDiscount());
+    existing.setRetailerDiscount(updatedProduct.getRetailerDiscount());
+    existing.setDiscountEnabled(updatedProduct.isDiscountEnabled());
 
-        double finalPrice = existing.getPrice()
-                - (existing.getPrice() * existing.getDiscount() / 100);
+    double finalPrice = existing.getPrice()
+            - (existing.getPrice() * existing.getDiscount() / 100);
 
-        existing.setFinalPrice(finalPrice);
+    existing.setFinalPrice(finalPrice);
 
-        return productRepository.save(existing);
-    }
+    return productRepository.save(existing);
+}
 
     // ================= DELETE PRODUCT =================
-    public void deleteProduct(String id) {
-        Product existing = getProductById(id);
-        productRepository.delete(existing);
-    }
+public void deleteProduct(String productName) {
+
+    Product existing = productRepository.findByProductNameIgnoreCase(productName)
+            .orElseThrow(() -> new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "Product not found with name: " + productName));
+
+    productRepository.delete(existing);
+}
 
     // ================= GET ALL PRODUCTS =================
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
-    // ================= GET PRODUCT BY ID =================
+    // ================= GET PRODUCT BY NAME =================
+public Product getProductByName(String productName) {
+
+    Product product = productRepository.findByProductNameIgnoreCase(productName)
+            .orElseThrow(() -> new ResponseStatusException(
+                    HttpStatus.NOT_FOUND,
+                    "Product not found with name: " + productName));
+
+    if (product.getStockQuantity() == 0) {
+        throw new ResponseStatusException(
+                HttpStatus.BAD_REQUEST,
+                "Product is out of stock");
+    }
+
+    return product;
+}
+
+    // ================= GET PRODUCT BY ID (REAL DB ID) =================
     public Product getProductById(String id) {
 
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(
                         HttpStatus.NOT_FOUND,
-                        "Product not found with id: " + id));
+                        "Product not found with ID: " + id));
 
         if (product.getStockQuantity() == 0) {
             throw new ResponseStatusException(

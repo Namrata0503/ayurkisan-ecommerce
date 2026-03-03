@@ -12,7 +12,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.ayurkisan.model.Customer;
 import com.ayurkisan.model.Retailer;
+import com.ayurkisan.dto.AdminUpdateRequest;
 import com.ayurkisan.service.AdminService;
+
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -44,6 +49,18 @@ public String recoverCustomer(@PathVariable String id) {
 @PutMapping("/recover/retailer/{id}")
 public String recoverRetailer(@PathVariable String id) {
     return adminService.recoverRetailer(id);
+}
+
+// ================= UPDATE ADMIN =================
+@PutMapping("/update/{id}")
+public String updateAdmin(@PathVariable String id, @Valid @RequestBody AdminUpdateRequest request) {
+    return adminService.updateAdmin(id, request);
+}
+
+// ================= DELETE ADMIN =================
+@DeleteMapping("/delete/{id}")
+public String deleteAdmin(@PathVariable String id) {
+    return adminService.deleteAdmin(id);
 }
 
 }

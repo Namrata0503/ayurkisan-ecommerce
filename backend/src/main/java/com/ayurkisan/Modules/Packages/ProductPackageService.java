@@ -41,6 +41,13 @@ public class ProductPackageService {
                 .orElseThrow(() -> new RuntimeException("Package not found"));
     }
 
+    // GET BY ID
+    public ProductPackage getPackageById(String id) {
+
+        return repository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Package not found with ID: " + id));
+    }
+
     // UPDATE BY NAME
     public ProductPackage updateByName(String name, ProductPackage updatedPackage) {
 

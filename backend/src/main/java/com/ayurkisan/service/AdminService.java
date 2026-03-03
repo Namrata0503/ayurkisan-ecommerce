@@ -11,6 +11,10 @@ import com.ayurkisan.model.Retailer;
 import com.ayurkisan.repository.CustomerRepository;
 import com.ayurkisan.repository.RetailerRepository;
 
+import com.ayurkisan.model.Admin;
+import com.ayurkisan.repository.AdminRepository;
+import com.ayurkisan.dto.AdminUpdateRequest;
+
 @Service
 public class AdminService {
 
@@ -19,6 +23,9 @@ public class AdminService {
 
     @Autowired
     private RetailerRepository retailerRepository;
+
+    @Autowired
+    private AdminRepository adminRepository;
 
     // ================= VIEW ALL CUSTOMERS =================
     public List<Customer> getAllCustomers() {
@@ -52,5 +59,40 @@ public class AdminService {
         retailerRepository.save(retailer);
 
         return "Retailer recovered successfully";
+    }
+
+    // ================= UPDATE ADMIN =================
+    public String updateAdmin(String id, AdminUpdateRequest request) {
+        Admin admin = adminRepository.findById(id)
+                .orElseThrow(() -> new CustomException("Admin not found"));
+
+        if (request.getName() != null) {
+            admin.setName(request.getName());
+        }
+        if (request.getEmail() != null) {
+            // Check if new email already exists and belongs to another admin
+            if (!admin.getEmail().equals(request.getEmail()) && adminRepository.existsByEmail(request.getEmail())) {
+                throw new CustomException("Email already in use");
+            }
+            admin.setEmail(request.getEmail());
+        }
+        if (request.getPhoneNumber() != null) {
+            admin.setPhoneNumber(request.getPhoneNumber());
+        }
+        if (request.getAddress() != null) {
+            admin.setAddress(request.getAddress());
+        }
+
+        adminRepository.save(admin);
+        return "Admin updated successfully";
+    }
+
+    // ================= DELETE ADMIN =================
+    public String deleteAdmin(String id) {
+        Admin admin = adminRepository.findById(id)
+                .orElseThrow(() -> new CustomException("Admin not found"));
+
+        adminRepository.delete(admin);
+        return "Admin deleted successfully";
     }
 }

@@ -40,30 +40,29 @@ public class ProductController {
         return response;
     }
 
-    @PutMapping("/admin/update/{id}")
-    public Map<String, Object> updateProduct(@PathVariable String id,
-                                             @Valid @RequestBody Product product) {
+    @PutMapping("/admin/update/{productName}")
+public Map<String, Object> updateProduct(@PathVariable String productName,
+                                         @Valid @RequestBody Product product) {
 
-        Product updated = productService.updateProduct(id, product);
+    Product updated = productService.updateProduct(productName, product);
 
-        Map<String, Object> response = new HashMap<>();
-        response.put("message", "Product updated successfully");
-        response.put("productId", updated.getId());
+    Map<String, Object> response = new HashMap<>();
+    response.put("message", "Product updated successfully");
+    response.put("productId", updated.getId());
 
-        return response;
-    }
+    return response;
+}
 
-    @DeleteMapping("/admin/delete/{id}")
-    public Map<String, String> deleteProduct(@PathVariable String id) {
+@DeleteMapping("/admin/delete/{productName}")
+public Map<String, String> deleteProduct(@PathVariable String productName) {
 
-        productService.deleteProduct(id);
+    productService.deleteProduct(productName);
 
-        Map<String, String> response = new HashMap<>();
-        response.put("message", "Product deleted successfully");
+    Map<String, String> response = new HashMap<>();
+    response.put("message", "Product deleted successfully");
 
-        return response;
-    }
-
+    return response;
+}
     // ================= CUSTOMER & RETAILER APIs =================
 
     @GetMapping("/all")
@@ -71,8 +70,8 @@ public class ProductController {
         return productService.getAllProducts();
     }
 
-    @GetMapping("/{id}")
-    public Product getProduct(@PathVariable String id) {
-        return productService.getProductById(id);
-    }
+    @GetMapping("/{productName}")
+public Product getProduct(@PathVariable String productName) {
+    return productService.getProductByName(productName);
+}
 }
