@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ayurkisan.model.Admin;
 import com.ayurkisan.model.Customer;
 import com.ayurkisan.model.Retailer;
 import com.ayurkisan.dto.AdminUpdateRequest;
@@ -62,5 +63,9 @@ public String updateAdmin(@PathVariable String id, @Valid @RequestBody AdminUpda
 public String deleteAdmin(@PathVariable String id) {
     return adminService.deleteAdmin(id);
 }
-
+// ================= VIEW ALL ADMINS =================
+@GetMapping("/admins")
+public List<Admin> getAllAdmins() {
+    return adminService.getAllAdmins();
+}
 }

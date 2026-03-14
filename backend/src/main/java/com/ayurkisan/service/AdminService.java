@@ -95,4 +95,9 @@ public class AdminService {
         adminRepository.delete(admin);
         return "Admin deleted successfully";
     }
+    
+    // ================= VIEW ALL ADMINS =================
+    public List<Admin> getAllAdmins() {
+        return adminRepository.findAll();
+    }
 }

@@ -5,6 +5,7 @@ com\ayurkisan\controller\ProductController.class
 com\ayurkisan\Modules\Cart\CartController.class
 com\ayurkisan\Modules\Category\Category.class
 com\ayurkisan\dto\CustomerSignupRequest.class
+com\ayurkisan\config\WebConfig.class
 com\ayurkisan\Modules\Packages\PackageItem.class
 com\ayurkisan\controller\TestController.class
 com\ayurkisan\dto\AuthResponse.class

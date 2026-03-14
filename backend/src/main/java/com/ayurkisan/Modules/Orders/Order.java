@@ -37,6 +37,7 @@ public class Order {
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime shippedAt;
     private LocalDateTime deliveredAt;
+    private LocalDateTime returnDeadline;
 
     // ===== GETTERS & SETTERS =====
 
@@ -87,4 +88,7 @@ public class Order {
 
     public LocalDateTime getDeliveredAt() { return deliveredAt; }
     public void setDeliveredAt(LocalDateTime deliveredAt) { this.deliveredAt = deliveredAt; }
+
+    public LocalDateTime getReturnDeadline() { return returnDeadline; }
+    public void setReturnDeadline(LocalDateTime returnDeadline) { this.returnDeadline = returnDeadline; }
 }

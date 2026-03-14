@@ -18,6 +18,8 @@ import com.ayurkisan.repository.CustomerRepository;
 import com.ayurkisan.repository.RetailerRepository;
 import com.ayurkisan.service.ProductService;
 import com.ayurkisan.Modules.Packages.ProductPackageService;
+import com.ayurkisan.Modules.Shipment.ShipmentService;
+import org.springframework.context.annotation.Lazy;
 
 @Service
 public class OrderService {
@@ -42,6 +44,10 @@ public class OrderService {
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    @Lazy
+    private ShipmentService shipmentService;
 
     @Transactional
     public Order placeOrder(String userId, String role, String paymentMethod) {
@@ -146,6 +152,11 @@ public class OrderService {
         return orderRepository.findAll();
     }
 
+    public Order getOrderById(String orderId) {
+        return orderRepository.findById(orderId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found"));
+    }
+
     @Transactional
     public Order cancelOrder(String orderId, String userId) {
         Order order = orderRepository.findById(orderId)
@@ -155,8 +166,10 @@ public class OrderService {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Not authorized to cancel this order");
         }
 
-        if ("DELIVERED".equalsIgnoreCase(order.getOrderStatus()) || "CANCELLED".equalsIgnoreCase(order.getOrderStatus())) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order cannot be cancelled in status: " + order.getOrderStatus());
+        String status = order.getOrderStatus();
+        if ("SHIPPED".equalsIgnoreCase(status) || "OUT_FOR_DELIVERY".equalsIgnoreCase(status) || 
+            "DELIVERED".equalsIgnoreCase(status) || "CANCELLED".equalsIgnoreCase(status)) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Order cannot be cancelled in status: " + status);
         }
 
         // Add back physical stock
@@ -181,12 +194,28 @@ public class OrderService {
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Order not found"));
 
+        if (order.getOrderStatus().equals(newStatus)) {
+            return order; // Prevent recursive loops when ShipmentService -> OrderService call happens
+        }
+
         order.setOrderStatus(newStatus);
         
-        if ("SHIPPED".equalsIgnoreCase(newStatus)) {
+        if ("CONFIRMED".equalsIgnoreCase(newStatus)) {
+            shipmentService.createShipment(order);
+        } else if ("SHIPPED".equalsIgnoreCase(newStatus)) {
             order.setShippedAt(java.time.LocalDateTime.now());
         } else if ("DELIVERED".equalsIgnoreCase(newStatus)) {
             order.setDeliveredAt(java.time.LocalDateTime.now());
+            order.setReturnDeadline(java.time.LocalDateTime.now().plusDays(5));
+            emailService.sendOrderDelivered(order.getContactEmail(), order);
+        } else if ("RETURNED".equalsIgnoreCase(newStatus)) {
+            // Add back physical stock when return is complete
+            for (OrderItem item : order.getItems()) {
+                if ("PRODUCT".equalsIgnoreCase(item.getItemType())) {
+                    Product product = productService.getProductById(item.getProductId());
+                    productService.increaseStock(product.getId(), item.getQuantity());
+                }
+            }
         }
 
         return orderRepository.save(order);

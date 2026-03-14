@@ -49,6 +49,15 @@ ADMIN MODULE -
 2️⃣ View All Retailers - GET - /api/admin/retailers
 3️⃣ Recover Customer - PUT - /api/admin/recover/customer/{id}
 4️⃣ Recover Retailer - PUT - /api/admin/recover/retailer/{id}
+5️⃣ Update Admin - PUT - /api/admin/update/{id}
+Request Body - 
+{
+  "name": "Updated Name",
+  "phoneNumber": "9876543210",
+  "address": "Updated Address"
+}
+6️⃣ Delete Admin - DELETE - /api/admin/delete/{id}
+7️⃣ View All Admins - GET - /api/admin/admins
 
 CUSTOMER MODULE APIs - 
 1️⃣ Update Customer Profile - PUT - /api/customer/update/{id}
@@ -248,3 +257,19 @@ Body Example -
 3️⃣ Cancel Order - PUT - http://localhost:9090/orders/cancel/{orderId}
 4️⃣ Get All Orders (Admin) - GET - http://localhost:9090/orders/admin/all
 5️⃣ Update Order Status (Admin) - PUT - http://localhost:9090/orders/admin/status/{orderId}?newStatus=SHIPPED
+
+## SHIPMENT MODULE APIs -
+*(Note: Requires JWT token in Authorization header e.g., 'Bearer eyJhb...')*
+1️⃣ Track Shipment - GET - http://localhost:9090/shipments/track/{orderId}
+2️⃣ Get All Shipments (Admin) - GET - http://localhost:9090/shipments/admin/all
+3️⃣ Update Shipment Status (Admin) - PUT - http://localhost:9090/shipments/admin/status/{orderId}?newStatus=SHIPPED&remarks=Dispatching today
+*(Admin can set statuses: CONFIRMED, SHIPPED, OUT_FOR_DELIVERY, DELIVERED)*
+
+## RETURN MODULE APIs -
+*(Note: Requires JWT token in Authorization header e.g., 'Bearer eyJhb...')*
+1️⃣ Initiate Return - POST - http://localhost:9090/returns/request/{orderId}?reason=Damaged item&comments=Box was open
+2️⃣ Get My Returns - GET - http://localhost:9090/returns/my-returns
+3️⃣ Track Return - GET - http://localhost:9090/returns/track/{orderId}
+4️⃣ Get All Returns (Admin) - GET - http://localhost:9090/returns/admin/all
+5️⃣ Update Return Status (Admin) - PUT - http://localhost:9090/returns/admin/status/{orderId}?newStatus=ACCEPTED&remarks=Arranging pickup
+*(Admin can set statuses: ACCEPTED, REJECTED, PICKED_UP, REFUNDED)*
