@@ -6,9 +6,14 @@ com\ayurkisan\Modules\Cart\CartController.class
 com\ayurkisan\Modules\Category\Category.class
 com\ayurkisan\dto\CustomerSignupRequest.class
 com\ayurkisan\config\WebConfig.class
+com\ayurkisan\Modules\Returns\ReturnService.class
+com\ayurkisan\Modules\Returns\ReturnUpdate.class
 com\ayurkisan\Modules\Packages\PackageItem.class
+com\ayurkisan\Modules\Returns\ReturnRequest.class
+com\ayurkisan\Modules\Shipment\ShipmentRepository.class
 com\ayurkisan\controller\TestController.class
 com\ayurkisan\dto\AuthResponse.class
+com\ayurkisan\Modules\Shipment\Shipment.class
 com\ayurkisan\Modules\Category\CategoryService.class
 com\ayurkisan\config\MongoConnectionLogger.class
 com\ayurkisan\Modules\Category\CategoryController.class
@@ -31,6 +36,7 @@ com\ayurkisan\Modules\Packages\ProductPackage.class
 com\ayurkisan\Modules\Cart\CartService.class
 com\ayurkisan\dto\LoginRequest.class
 com\ayurkisan\Modules\Category\CategoryRepository.class
+com\ayurkisan\Modules\Shipment\ShipmentService.class
 com\ayurkisan\Modules\Orders\Order.class
 com\ayurkisan\dto\UpdateCustomerRequest.class
 com\ayurkisan\Modules\Feedback\FeedbackRepository.class
@@ -47,6 +53,7 @@ com\ayurkisan\Modules\Orders\OrderService.class
 com\ayurkisan\exception\CustomException.class
 com\ayurkisan\repository\CustomerRepository.class
 com\ayurkisan\Modules\Feedback\Feedback.class
+com\ayurkisan\Modules\Shipment\ShipmentController.class
 com\ayurkisan\config\SwaggerConfig.class
 com\ayurkisan\Modules\Orders\OrderController.class
 com\ayurkisan\model\Login.class
@@ -57,8 +64,11 @@ com\ayurkisan\Modules\Feedback\FeedbackController.class
 com\ayurkisan\dto\RetailerSignupRequest.class
 com\ayurkisan\model\Admin.class
 com\ayurkisan\repository\ProductRepository.class
+com\ayurkisan\Modules\Shipment\ShipmentUpdate.class
 com\ayurkisan\config\JwtFilter.class
 com\ayurkisan\exception\GlobalExceptionHandler.class
+com\ayurkisan\Modules\Returns\ReturnRepository.class
 com\ayurkisan\controller\AuthController.class
 com\ayurkisan\controller\RetailerController.class
+com\ayurkisan\Modules\Returns\ReturnController.class
 com\ayurkisan\model\Product.class
