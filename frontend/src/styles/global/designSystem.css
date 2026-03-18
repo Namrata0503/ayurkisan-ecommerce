@@ -1,0 +1,36 @@
+:root {
+
+  /* PRIMARY COLORS - Premium Deep Green */
+  --primary: #1b4332;
+  --primary-light: #2d6a4f;
+  --primary-dark: #081c15;
+
+  /* SECONDARY - Soft Sage/Earthy */
+  --accent: #d8f3dc;
+  --accent-gold: #d4af37;
+
+  /* BACKGROUNDS */
+  --bg-light: #fbfbf9;
+  --bg-white: #ffffff;
+  --bg-glass: rgba(255, 255, 255, 0.75);
+
+  /* TEXT */
+  --text-dark: #1F2933;
+  --text-light: #6B7280;
+
+  /* SHADOW - Soft Diffused */
+  --shadow-soft: 0 8px 24px rgba(27, 67, 50, 0.05);
+  --shadow-strong: 0 16px 40px rgba(27, 67, 50, 0.1);
+  --shadow-hover: 0 20px 50px rgba(27, 67, 50, 0.15);
+
+  /* BORDER RADIUS */
+  --radius-sm: 8px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 40px;
+
+  /* BLUR */
+  --blur-md: blur(12px);
+  --blur-lg: blur(24px);
+
+}

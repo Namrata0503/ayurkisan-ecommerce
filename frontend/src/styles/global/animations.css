@@ -1,0 +1,33 @@
+.reveal{
+opacity:0;
+transform:translateY(40px);
+transition:all 0.8s ease;
+}
+
+.reveal.active{
+opacity:1;
+transform:translateY(0);
+}
+
+.fade-up{
+opacity:0;
+transform:translateY(40px);
+transition:0.8s;
+}
+
+.fade-up.active{
+opacity:1;
+transform:translateY(0);
+}
+
+/* FLOATING EFFECT */
+
+.float{
+animation:float 4s ease-in-out infinite;
+}
+
+@keyframes float{
+0%{transform:translateY(0)}
+50%{transform:translateY(-12px)}
+100%{transform:translateY(0)}
+}

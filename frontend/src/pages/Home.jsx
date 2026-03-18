@@ -1,18 +1,23 @@
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import "../styles/home.css";
-import { useNavigate } from "react-router-dom";
+import Hero from "../components/Hero";
+import FeatureBar from "../components/FeatureBar";
+import AboutSection from "../components/AboutSection";
+import FeatureCards from "../components/FeatureCards";
+import CTASection from "../components/CTASection";
+import TrustSection from "../components/TrustSection";
+import ProductShowcase from "../components/ProductShowcase";
+import TestimonialSection from "../components/TestimonialSection";
+import StatsSection from "../components/StatsSection";
+import CTABanner from "../components/CTABanner";
+import HeroSlider from "../components/HeroSlider";
+import BlogSection from "../components/BlogSection";
+
+import "../styles/pages/home.css";
 import { useEffect } from "react";
-import heroImage from "../assets/images/heroimage.jpg";
+import { Link } from "react-router-dom";
 
-import aloeNeemImg from "../assets/products_img/aloeneemtulsi.png";
-import alomoringaImg from "../assets/products_img/aloemoringa.png";
-import ayupowerImg from "../assets/products_img/ayupower.png";
-
-//components
 function Home() {
-  const navigate = useNavigate();
-// Scroll Reveal Effect
+
+  // Scroll Reveal Animation
   useEffect(() => {
     const reveals = document.querySelectorAll(".reveal");
 
@@ -20,9 +25,9 @@ function Home() {
       reveals.forEach((el) => {
         const windowHeight = window.innerHeight;
         const elementTop = el.getBoundingClientRect().top;
-        const elementVisible = 100;
+        const visible = 120;
 
-        if (elementTop < windowHeight - elementVisible) {
+        if (elementTop < windowHeight - visible) {
           el.classList.add("active");
         }
       });
@@ -35,104 +40,101 @@ function Home() {
   }, []);
 
   return (
-    <>
-      <Navbar />
+    <div className="home-page">            
+  
+      {/* MAIN HERO */}
+      <section className="reveal">
+        <Hero />
+      </section>
 
-      {/* HERO SECTION */}
-      <section className="hero">
-        <div className="hero-container">
+      {/* HERO ADS SLIDER */}
+      <section className="reveal">
+        <HeroSlider />
+      </section>
 
-          <div className="hero-left">
-            <span className="small-title">
-              AYURVEDIC HERBAL WELLNESS
-            </span>
+      {/* HERBAL BLOG */}
+      <section className="reveal">
+        <BlogSection />
+      </section>
 
-            <h1>
-              Natural Healing <br />
-              Starts From Within 🌿
-            </h1>
+        {/* PRODUCTS */}
+      <section className="reveal">
+        <ProductShowcase />
+      </section>
 
+       {/* TRUST BADGES */}
+      <section className="reveal">
+        <TrustSection />
+      </section>
+
+      {/* QUICK FEATURES */}
+      <section className="reveal">
+        <FeatureBar />
+      </section>   
+
+      {/* STATISTICS */}
+      <section className="reveal">
+        <StatsSection />
+      </section>
+
+      {/* WHY CHOOSE US */}
+      <section className="reveal">
+        <FeatureCards />
+      </section>
+
+{/* CALL TO ACTION */}
+      <section className="reveal">
+        <CTASection />
+      </section>
+
+      {/* TESTIMONIALS */}
+      <section className="reveal">
+        <TestimonialSection />
+      </section>
+
+      {/* ABOUT */}
+      <section className="reveal">
+        <AboutSection />
+      </section>
+
+      <section className="reveal home-connect-section">
+        <div className="container home-connect-grid">
+          <div className="home-connect-card about-card">
+            <span className="home-connect-tag">About Us</span>
+            <h2>Built around authentic Ayurvedic wellness and trusted farming roots.</h2>
             <p>
-              Experience the purity of Aloe Vera, Moringa,
-              Tulsi and Ayurvedic blends crafted for
-              complete wellness and vitality.
+              Learn how AyurKisan brings natural products, transparent sourcing,
+              and modern ecommerce together for a healthier lifestyle.
             </p>
+            <Link to="/about" className="home-connect-btn">
+              Explore Our Story
+            </Link>
+          </div>
 
-            <div className="hero-buttons">
-              <button onClick={() => navigate("/signup")}>
-                Shop Now
-              </button>
-
-              <button
-                className="outline-btn"
-                onClick={() => navigate("/shop")}
-              >
-                Explore Collection
-              </button>
+          <div className="home-connect-card contact-card">
+            <span className="home-connect-tag">Contact Us</span>
+            <h2>Need help with orders, products, or your wellness journey?</h2>
+            <p>
+              Reach our support team for product guidance, delivery help, and retail partnership questions.
+            </p>
+            <div className="home-contact-list">
+              <span>support@ayurkisan.com</span>
+              <span>+91 98765 43210</span>
+              <span>Pune, Maharashtra</span>
             </div>
+            <Link to="/contact" className="home-connect-btn">
+              Get In Touch
+            </Link>
           </div>
-
-          <div className="hero-right">
-            <img src={heroImage} alt="Herbal Products" />
-          </div>
-
         </div>
       </section>
 
-      {/* FEATURES SECTION */}
-      <section className="features reveal">
-        <div className="features-container">
-
-          <div className="feature-card">
-            <h3>100% Natural</h3>
-            <p>No chemicals, no preservatives. Pure Ayurvedic goodness.</p>
-          </div>
-
-          <div className="feature-card">
-            <h3>Authentic Ingredients</h3>
-            <p>Sourced directly from trusted organic farms.</p>
-          </div>
-
-          <div className="feature-card">
-            <h3>Lab Tested</h3>
-            <p>Strict quality checks to ensure premium standards.</p>
-          </div>
-
-        </div>
+      {/* FINAL BANNER */}
+      <section className="reveal">
+        <CTABanner />
       </section>
 
-      {/* BEST SELLERS */}
-      <section className="best-sellers reveal">
-        <h2>Our Best Sellers</h2>
-
-        <div className="products-grid">
-
-          <div className="product-card">
-  <img src={aloeNeemImg} alt="Aloe Neem Tulsi Juice" className="product-image" />
-  <h4>Aloe Neem Tulsi</h4>
-  <p>₹499</p>
-  <button onClick={() => navigate("/shop")}>View</button>
-</div>
-
-<div className="product-card">
-  <img src={alomoringaImg} alt="Alo Moringa Juice" className="product-image" />
-  <h4>Alo Moringa</h4>
-  <p>₹349</p>
-  <button onClick={() => navigate("/shop")}>View</button>
-</div>
-
-<div className="product-card">
-  <img src={ayupowerImg} alt="Ayupower Tea" className="product-image" />
-  <h4>Ayupower Tea</h4>
-  <p>₹299</p>
-  <button onClick={() => navigate("/shop")}>View</button>
-</div>
-
-        </div>
-      </section>
-
-      <Footer />
-    </>
+    </div>
   );
 }
 

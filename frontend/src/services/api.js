@@ -1,10 +1,11 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:8080/api",
+  // Keep all browser requests on localhost:5173 and send them through Vite's proxy.
+  baseURL: import.meta.env.VITE_API_BASE_URL || "/",
+  timeout: 10000,
 });
 
-// Add token automatically if available
 API.interceptors.request.use((req) => {
   const token = localStorage.getItem("token");
   if (token) {

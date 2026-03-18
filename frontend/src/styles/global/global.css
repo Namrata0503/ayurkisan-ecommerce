@@ -1,0 +1,43 @@
+.btn-primary{
+background:linear-gradient(
+135deg,
+var(--primary),
+var(--primary-light)
+);
+
+color:white;
+
+padding:12px 24px;
+
+border:none;
+border-radius:var(--radius-md);
+
+cursor:pointer;
+
+font-weight:600;
+
+transition:0.25s;
+
+box-shadow:var(--shadow-soft);
+}
+
+.btn-primary:hover{
+transform:translateY(-2px);
+
+box-shadow:var(--shadow-strong);
+}
+
+/* OUTLINE BUTTON */
+
+.btn-outline{
+border:1px solid var(--primary);
+color:var(--primary);
+
+background:transparent;
+
+padding:10px 22px;
+
+border-radius:var(--radius-md);
+
+cursor:pointer;
+}
