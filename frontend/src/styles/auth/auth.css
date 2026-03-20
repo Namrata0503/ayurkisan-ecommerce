@@ -37,15 +37,17 @@
   font-size: 54px;
   line-height: 1.1;
   margin-bottom: 20px;
-  text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Ensure visibility */
+  color: #ffffff;
+  text-shadow: 0 6px 16px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.4);
 }
 
 .auth-visual-quote p {
   font-size: 18px;
-  opacity: 1; /* Pure white for better contrast */
+  color: #ffffff;
+  opacity: 1; 
   max-width: 80%;
   line-height: 1.6;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 
 .auth-visual-content {
@@ -70,26 +72,7 @@
   filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
 }
 
-.auth-visual-logo span {
-  font-family: 'Outfit', sans-serif;
-  font-size: 28px;
-  font-weight: 800;
-  color: white;
-}
-
-.auth-visual-quote h1 {
-  font-family: 'Outfit', sans-serif;
-  font-size: 54px;
-  line-height: 1.1;
-  margin-bottom: 20px;
-}
-
-.auth-visual-quote p {
-  font-size: 18px;
-  opacity: 0.9;
-  max-width: 80%;
-  line-height: 1.6;
-}
+/* Removed unused span and duplicate quote styles */
 
 /* RIGHT SIDE - FORM AREA */
 .auth-form-area {

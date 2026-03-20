@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
+import { toast } from "react-toastify";
 import { loginUser } from "../services/authService";
 import "../styles/auth/auth.css";
 import logo from "../assets/logo.png";
@@ -10,7 +11,6 @@ function Login() {
   const navigate = useNavigate();
   const { login } = useAuth();
   const [activeTab, setActiveTab] = useState("CUSTOMER");
-  const [errorText, setErrorText] = useState("");
 
   const [form, setForm] = useState({
     email: "",
@@ -23,12 +23,10 @@ function Login() {
 
   const handleTabClick = (role) => {
     setActiveTab(role);
-    setErrorText(""); // Clear errors on tab switch
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setErrorText("");
 
     try {
       const payload = { ...form, role: activeTab };
@@ -43,12 +41,19 @@ function Login() {
         userName: form.email.split("@")[0]
       });
 
-      if (role === "ADMIN") navigate("/admin/dashboard");
-      else if (role === "CUSTOMER") navigate("/customer/dashboard");
-      else if (role === "RETAILER") navigate("/retailer/dashboard");
+      if (role === "ADMIN") {
+        toast.success("Welcome back, Admin!");
+        navigate("/admin/dashboard");
+      } else if (role === "CUSTOMER") {
+        toast.success("Welcome back!");
+        navigate("/customer/dashboard");
+      } else if (role === "RETAILER") {
+        toast.success("Store login successful!");
+        navigate("/retailer/dashboard");
+      }
 
     } catch (error) {
-      setErrorText(error.response?.data?.message || "Invalid credentials. Please try again.");
+      toast.error(error.response?.data?.message || "Invalid credentials. Please try again.");
     }
   };
 
@@ -67,8 +72,7 @@ function Login() {
         <div className="auth-visual-overlay"></div>
         <div className="auth-visual-content">
           <Link to="/" className="auth-visual-logo">
-            <img src={logo} alt="AyurKisan" />
-            <span>AyurKisan</span>
+            <img src={logo} alt="AyurKisan Logo" />
           </Link>
 
           <div className="auth-visual-quote">
@@ -150,8 +154,6 @@ function Login() {
               />
               <label htmlFor="password">Password</label>
             </div>
-
-            {errorText && <div style={{ color: "red", fontSize: "12px", marginBottom: "15px", textAlign: "center" }}>{errorText}</div>}
 
             <motion.button 
               type="submit" 

@@ -62,7 +62,7 @@ function Navbar() {
 
   const guestLinks = [
     { name: "Home", path: "/" },
-    { name: "Products", path: "/products" },
+    { name: "Shop", path: "/products" },
     { name: "About Us", path: "/about" },
     { name: "Contact Us", path: "/contact" },
     { name: "Feedback", path: "/feedback" },
@@ -71,7 +71,7 @@ function Navbar() {
 
   const authLinks = [
     { name: "Home", path: "/" },
-    { name: "Products", path: "/products" },
+    { name: "Shop", path: "/products" },
     { name: "Cart", path: "/cart" },
     { name: "Track Order", path: "/track-order" },
     { name: "Feedback", path: "/feedback" },

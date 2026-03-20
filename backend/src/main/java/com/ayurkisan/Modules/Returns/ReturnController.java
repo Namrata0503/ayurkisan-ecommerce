@@ -20,7 +20,7 @@ import org.springframework.web.server.ResponseStatusException;
 import com.ayurkisan.util.JwtUtil;
 
 @RestController
-@RequestMapping("/returns")
+@RequestMapping("/api/returns")
 public class ReturnController {
 
     @Autowired

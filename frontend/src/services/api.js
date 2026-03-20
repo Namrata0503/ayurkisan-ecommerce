@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const API = axios.create({
-  // Keep all browser requests on localhost:5173 and send them through Vite's proxy.
-  baseURL: import.meta.env.VITE_API_BASE_URL || "/",
+  baseURL: "http://localhost:9090/api",
+  withCredentials: false,
   timeout: 10000,
 });
 
@@ -13,5 +13,17 @@ API.interceptors.request.use((req) => {
   }
   return req;
 });
+
+API.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.message === "Network Error" || error.code === "ERR_NETWORK") {
+      console.error("Backend CORS issue:", error.message);
+    }
+    return Promise.reject(error);
+  }
+);
 
 export default API;

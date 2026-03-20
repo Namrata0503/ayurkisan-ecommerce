@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { NavLink, useNavigate, Outlet } from "react-router-dom";
+import { Link, NavLink, useNavigate, Outlet } from "react-router-dom";
 import {
   FaTachometerAlt,
   FaUsers,
@@ -17,6 +17,7 @@ import {
   FaHome
 } from "react-icons/fa";
 import "../styles/dashboard/adminLayout.css";
+import logo from "../assets/logo.png";
 
 function AdminLayout() {
   const navigate = useNavigate();
@@ -45,9 +46,9 @@ function AdminLayout() {
             <div className="sidebar-top">
               <Link to="/" className="admin-logo-link">
                 {collapsed ? (
-                  <img src="/src/assets/logo.png" alt="AK" className="sidebar-logo-img mini" />
+                  <img src={logo} alt="AK" className="sidebar-logo-img mini" />
                 ) : (
-                  <img src="/src/assets/logo.png" alt="AyurKisan" className="sidebar-logo-img" />
+                  <img src={logo} alt="AyurKisan" className="sidebar-logo-img" />
                 )}
               </Link>
               <FaBars

@@ -3,6 +3,7 @@ import { useNavigate, Link } from "react-router-dom";
 import { motion } from "framer-motion";
 import "../../styles/auth/auth.css";
 import logo from "../../assets/logo.png";
+import { loginUser } from "../../services/authService";
 
 function AdminLogin() {
   const navigate = useNavigate();
@@ -21,17 +22,22 @@ function AdminLogin() {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("");
 
-    if (
-      formData.email === "admin@ayurkisan.com" &&
-      formData.password === "admin123"
-    ) {
-      localStorage.setItem("role", "ADMIN");
-      navigate("/admin/dashboard");
-    } else {
-      setError("Invalid Admin Credentials");
+    try {
+      const response = await loginUser(formData);
+      localStorage.setItem("token", response.data.token);
+      localStorage.setItem("role", response.data.role);
+
+      if (response.data.role === "ADMIN") {
+        navigate("/admin/dashboard");
+      } else {
+        setError("Access denied: Not an Admin");
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || "Invalid Admin Credentials");
     }
   };
 

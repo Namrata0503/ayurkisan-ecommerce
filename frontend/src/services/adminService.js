@@ -3,49 +3,49 @@ import { adminSignup } from "./authService";
 
 const adminService = {
   getCustomers: async () => {
-    const response = await API.get("/api/admin/customers");
+    const response = await API.get("/admin/customers");
     return response.data;
   },
 
   recoverCustomer: async (id) => {
-    const response = await API.put(`/api/admin/recover/customer/${id}`);
+    const response = await API.put(`/admin/recover/customer/${id}`);
     return response.data;
   },
 
   deleteCustomer: async (id) => {
-    const response = await API.delete(`/api/customer/delete/${id}`);
+    const response = await API.delete(`/customer/delete/${id}`);
     return response.data;
   },
 
   getRetailers: async () => {
-    const response = await API.get("/api/admin/retailers");
+    const response = await API.get("/admin/retailers");
     return response.data;
   },
 
   recoverRetailer: async (id) => {
-    const response = await API.put(`/api/admin/recover/retailer/${id}`);
+    const response = await API.put(`/admin/recover/retailer/${id}`);
     return response.data;
   },
 
   deleteRetailer: async (id) => {
-    const response = await API.delete(`/api/retailer/delete/${id}`);
+    const response = await API.delete(`/retailer/delete/${id}`);
     return response.data;
   },
 
   getAllAdmins: async () => {
-    const response = await API.get("/api/admin/admins");
+    const response = await API.get("/admin/admins");
     return response.data;
   },
 
   registerAdmin: adminSignup,
 
   updateAdmin: async (id, adminData) => {
-    const response = await API.put(`/api/admin/update/${id}`, adminData);
+    const response = await API.put(`/admin/update/${id}`, adminData);
     return response.data;
   },
 
   deleteAdmin: async (id) => {
-    const response = await API.delete(`/api/admin/delete/${id}`);
+    const response = await API.delete(`/admin/delete/${id}`);
     return response.data;
   }
 };
